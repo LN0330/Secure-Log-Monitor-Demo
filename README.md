@@ -8,6 +8,5 @@
 ---  
 - 示意圖:  
 ![image](https://github.com/LN0330/Secure-Log-Monitor-Demo/blob/main/GIF/01.png)
-![image](https://github.com/LN0330/Secure-Log-Monitor-Demo/blob/main/GIF/02.png)  
 ![image](https://github.com/LN0330/Secure-Log-Monitor-Demo/blob/main/GIF/03.gif)  
 ![image](https://github.com/LN0330/Secure-Log-Monitor-Demo/blob/main/GIF/04.gif)  
