@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\User; // 使用 Eloquent 模型
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
@@ -16,15 +17,16 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        \Log::info('Register request received!');
+        Log::info('Register request received!');
+
         $request->validate([
             'username' => 'required|unique:users',
             'password' => 'required|min:6'
         ]);
 
-        DB::table('users')->insert([
+        User::create([
             'username' => $request->username,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
         ]);
 
         return redirect('/')->with('success', '註冊成功！請登入');
@@ -32,8 +34,9 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        \Log::info('Login request received!');
-        $user = DB::table('users')->where('username', $request->username)->first();
+        Log::info('Login request received!');
+
+        $user = User::where('username', $request->username)->first();
 
         if ($user && Hash::check($request->password, $user->password)) {
             Session::put('user', $user->username);
@@ -64,12 +67,14 @@ class AuthController extends Controller
             return redirect('/')->with('error', '請先登入');
         }
 
-        DB::table('users')->where('username', Session::get('user'))->delete();
+        $username = Session::get('user');
+        User::where('username', $username)->delete();
+
         Session::forget('user');
 
         return redirect('/')->with('success', '帳號已刪除');
     }
-    
+
     public function getLogs()
     {
         $logPath = storage_path('logs/system.log');
