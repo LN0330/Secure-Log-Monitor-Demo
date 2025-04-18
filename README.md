@@ -4,7 +4,7 @@
 ---
 - 撰寫語言: PHP  
 - 架構: Laravel (Laradock)、MySQL  
-- 開發環境: Ubuntu 24.04.2、Visual Studio 2022  
+- 開發環境: Ubuntu 24.04.2 
 ---  
 - 示意圖:  
 ![image](https://github.com/LN0330/Secure-Log-Monitor-Demo/blob/main/GIF/1.png)  
